@@ -15,13 +15,11 @@ namespace randomszemely {
         public static List<string> existingIDs = new List<string>();
         static void Main(string[] args) {
             Console.ForegroundColor = ConsoleColor.DarkCyan;
-            // keresztnevek (női, férfi), vezetéknevek, települések, és megyék lekérése 
             WebClient web = new WebClient();
             foreach(string ffi_knev in web.DownloadString("https://drive.google.com/uc?export=download&id=1HZvGc1jxH4pGbZGHjxAG31wZ81CS1GSt").Split("\r\n")) { knevek_ffi.Add(ffi_knev); }
             foreach(string noi_knev in web.DownloadString("https://drive.google.com/uc?export=download&id=19MoRrj214ZpR-NbYvVW72JBKit1IKaz5").Split("\r\n")) { knevek_noi.Add(noi_knev); }
             foreach(string veznev in web.DownloadString("https://drive.google.com/uc?export=download&id=1X3LAmhaV3XpSkhW5uxcApCwnOJVGSTn_").Split("\r\n")) { vnevek.Add(veznev); }
             foreach(string telep_megy in web.DownloadString("https://drive.google.com/uc?export=download&id=17Cqz3ylpiFjvi6hBujuakmlzA1LKRnbV").Split("\r\n")) { telep.Add(telep_megy); }
-            // addig generál embereket amíg escape-et nem üt a felhasználó, utána vége van a programnak és bazárul
             ConsoleKey key;
             do {
                 Console.Clear();
@@ -72,7 +70,7 @@ namespace randomszemely {
                     ID += chars[r.Next(0, chars.Length - 1)];
                 }
             }
-            while (Program.existingIDs.Contains(ID)); // a lehetséges duplikáció elkerülése (addig generál új ID-kat amíg talál egy olyat, ami még nem fordult elő)
+            while (Program.existingIDs.Contains(ID));
             Program.existingIDs.Add(ID);
             Lakas = new Haz();
         }
